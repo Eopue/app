@@ -16,6 +16,7 @@ import com.example.sanstoi.myapplication.R;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class ScenicAddActivity extends AppCompatActivity {
 
@@ -43,7 +44,7 @@ public class ScenicAddActivity extends AppCompatActivity {
         tv.setText(getResources().getString(R.string.parent_scenic_selected) + parentScenic.getParentScenicName());
         btn_childAdd = (Button) findViewById(R.id.child_add_button);
         btn_submit = (Button) findViewById(R.id.submit);
-        btn_line_add = (Button) findViewById(R.id.line_btn);
+        btn_line_add = (Button) findViewById(R.id.line_add_button);
         tv2 = (TextView) findViewById(R.id.child_text);
         tv3 = (TextView) findViewById(R.id.line_text);
 
