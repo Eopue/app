@@ -28,7 +28,6 @@ public class LineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_line);
-
         init();
     }
 
@@ -40,12 +39,12 @@ public class LineActivity extends AppCompatActivity {
         lineOne = (EditText) findViewById(R.id.lineOne);
         lineTwo = (EditText) findViewById(R.id.lineTwo);
         lineThree = (EditText) findViewById(R.id.lineThree);
-        lineText = (TextView) findViewById(R.id.line_text);
+        lineText = (TextView) findViewById(R.id.lineText);
         submit = (Button) findViewById(R.id.line_btn);
         cancel = (Button) findViewById(R.id.line_cancel);
 
         lineText.setText(getResources().getString(R.string.child_scenic_added) + stringValue);
-
+        lineText.setText("test");
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +64,7 @@ public class LineActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.putExtra("resultMap", (Serializable) map);
-                LineActivity.this.setResult(2, intent);// 设置回传数据。resultCode值是1，这个值在主窗口将用来区分回传数据的来源，以做不同的处理
+                LineActivity.this.setResult(2, intent);// 设置回传数据。resultCode值是2，这个值在主窗口将用来区分回传数据的来源，以做不同的处理
                 LineActivity.this.finish();// 关闭子窗口ChildActivity
             }
         });
