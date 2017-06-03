@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sanstoi.myapplication">
+
+    <!-- &lt;!&ndash; 添加权限 &ndash;&gt; -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- &lt;!&ndash; To auto-complete the email text field in the login form with the user's emails &ndash;&gt; -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+
+    <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 允许程序改变网络连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- 读取手机信息权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- &lt;!&ndash; 添加开发者密钥 &ndash;&gt; -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="iO693DAVpOy5Vu5MqHzx4TmGHWUbl8as" />
+
+        <activity android:name="com.example.sanstoi.activity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <activity android:name="com.example.sanstoi.activity.RegisterActivity" />
+        <activity android:name="com.example.sanstoi.activity.ParentScenicAddActivity" />
+        <activity android:name="com.example.sanstoi.activity.ChildScenicAddActivity" />
+        <activity android:name="com.example.sanstoi.activity.ScenicAddActivity" />
+        <activity android:name="com.example.sanstoi.activity.LoginActivity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name="com.example.sanstoi.activity.ScenicDetails" />
+        <activity android:name="com.example.sanstoi.activity.LineActivity"></activity>
+    </application>
+
+</manifest>

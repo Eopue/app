@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="ifContentScrolls">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="551dp"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/parent_scenic_add"
+            android:gravity="center"
+            />
+
+         <TextView android:id="@+id/parentScenicProvinceText"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/parent_scenic_add_province"
+             android:layout_below="@+id/text"
+             android:paddingTop="2dp"
+             android:paddingLeft="4dp"
+             />
+
+        <Spinner android:id="@+id/parentScenicProvince"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:layout_toRightOf="@+id/parentScenicProvinceText"
+            android:entries="@array/province"
+            />
+
+        <TextView android:id="@+id/parentScenicCityText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/parent_scenic_add_city"
+            android:layout_below="@+id/parentScenicProvince"
+            android:paddingTop="2dp"
+            android:paddingLeft="4dp"
+            />
+
+        <Spinner android:id="@+id/parentScenicCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/parentScenicProvince"
+            android:layout_toRightOf="@+id/parentScenicCityText"
+            />
+
+        <EditText android:id="@+id/parentScenicName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/parent_scenic_add_name"
+            android:layout_below="@+id/parentScenicCity"
+            android:maxLines="1"
+            />
+
+        <EditText android:id="@+id/parentScenicPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/parent_scenic_add_price"
+            android:layout_below="@+id/parentScenicName"
+            android:maxLines="1"
+            />
+
+        <TextView android:id="@+id/parentScenicOpenDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/parentScenicPrice"
+            android:text="@string/scenic_opentime"
+            android:paddingTop="2dp"
+            android:paddingLeft="4dp"
+            />
+
+        <Spinner android:id="@+id/parentScenicOpenDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/parentScenicPrice"
+            android:layout_toRightOf="@id/parentScenicOpenDateText"
+            android:entries="@array/timeArray"
+            />
+
+        <TextView android:id="@+id/parentScenicStartTimeText"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/scenic_start_time"
+             android:layout_below="@+id/parentScenicOpenDate"
+             android:paddingTop="13dp"
+             android:paddingLeft="4dp"
+            />
+
+        <Button android:id="@+id/parentScenicStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/parentScenicOpenDate"
+            android:layout_toRightOf="@+id/parentScenicStartTimeText"
+            android:text="@string/scenic_time"
+            />
+
+        <TextView android:id="@+id/parentScenicEndTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scenic_end_time"
+            android:layout_below="@+id/parentScenicStartTime"
+            android:paddingTop="13dp"
+            android:paddingLeft="4dp"
+            />
+
+        <Button android:id="@+id/parentScenicEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scenic_time"
+            android:layout_below="@+id/parentScenicStartTime"
+            android:layout_toRightOf="@+id/parentScenicEndTimeText"
+            />
+
+        <EditText android:id="@+id/content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:minLines="8"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:background="@android:drawable/edit_text"
+            android:layout_below="@+id/parentScenicEndTime"
+            android:hint="@string/parent_scenic_brief"
+           />
+
+        <Button android:id="@+id/way_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/way_picture"
+            android:layout_below="@+id/content"/>
+
+        <ImageView
+            android:id="@+id/image_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/way_picture"/>
+            />
+
+        <Button android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit"
+            android:layout_below="@+id/image_up"/>
+
+        <Button android:id="@+id/clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/submit"
+            android:text="@string/clear"
+            />
+
+    </RelativeLayout>
+</ScrollView>

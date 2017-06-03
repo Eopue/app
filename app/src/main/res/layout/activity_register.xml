@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dip"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip">
+
+   <EditText android:id="@+id/register_nick"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="@string/register_nickname"
+       />
+
+    <EditText android:id="@+id/register_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/login_hint_password"
+        android:layout_below ="@id/register_nick"
+        />
+
+    <EditText android:id="@+id/register_repwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/register_repassword"
+        android:layout_below ="@+id/register_pwd"
+        />
+
+    <Button android:id="@+id/register_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register_button_submit"
+        android:layout_below="@+id/register_repwd"
+        />
+
+    <Button android:id="@+id/register_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register_button_cancel"
+        android:layout_below="@id/register_submit"
+        />
+
+</RelativeLayout>

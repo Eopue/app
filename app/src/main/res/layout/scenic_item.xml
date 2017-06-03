@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        />
+
+    <RelativeLayout
+        android:padding="20dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id ="@+id/tv_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/speak"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/parent_scenic_add_price"
+            android:layout_below="@+id/tv_province"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_money_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/parent_scenic_add_price"
+            android:layout_below="@+id/tv_name"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id ="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="money"
+            android:layout_toRightOf="@+id/tv_money_text"
+            android:layout_below="@+id/tv_name"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id ="@+id/tv_opentime_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/scenic_opentime"
+            android:layout_below="@+id/tv_money"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id ="@+id/tv_opentime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="opentime"
+            android:layout_below="@+id/tv_money"
+            android:layout_toRightOf="@+id/tv_opentime_text"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id ="@+id/tv_starttime_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/scenic_open_time"
+            android:layout_below="@+id/tv_opentime"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id ="@+id/tv_starttime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="opentime"
+            android:layout_below="@+id/tv_opentime"
+            android:layout_toRightOf="@+id/tv_starttime_text"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id ="@+id/tv_endtime_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="-"
+            android:layout_below="@+id/tv_opentime"
+            android:layout_toRightOf="@+id/tv_starttime"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id ="@+id/tv_endtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="opentime"
+            android:layout_below="@+id/tv_opentime"
+            android:layout_toRightOf="@+id/tv_endtime_text"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

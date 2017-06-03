@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sanstoi.activity.UserInfo">
+
+    <ImageView android:id="@+id/usernow_image"
+        android:layout_width="256px"
+        android:layout_height="256px"
+        android:src="@drawable/evil"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"/>
+
+    <TextView android:id="@+id/usernow_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernow_image"
+        android:gravity="center"
+        android:textSize="20dip"
+        android:padding="10dp"
+        />
+
+    <View android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:background="#7597B3"
+        android:layout_height="2dp"
+        android:layout_below="@+id/usernow_name"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button android:id="@+id/manage_scenic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/parent_scenic_add"
+        android:visibility="gone"
+        android:layout_below="@+id/line"
+        />
+
+    <Button android:id="@+id/exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exit"
+        android:layout_below="@+id/manage_scenic"/>
+
+</RelativeLayout>
