@@ -61,7 +61,11 @@ public class ScenicAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("lineText", "test");
+                if (!"".equals(tv2.getText().toString())) {
+                    intent.putExtra("lineText", tv2.getText().toString());
+                } else {
+                    intent.putExtra("lineText", "");
+                }
                 intent.setClass(ScenicAddActivity.this, LineActivity.class);
                 startActivityForResult(intent, 3);
             }
@@ -96,20 +100,21 @@ public class ScenicAddActivity extends AppCompatActivity {
                 }
                 break;
             case 2:
-                Intent intent = new Intent();
-                HashMap<String, String> map = (HashMap<String, String>) intent.getSerializableExtra("resultMap");
-                if (map.isEmpty()) {
-                    tv3.setText(R.string.line_empty);
-                    return;
-                }
-                tv3.setText(getResources().getString(R.string.line_total) + map.size());
-                for (String key : map.keySet()) {
-                    if (key.equals("lineOne")) {
-                        parentScenic.setLine1(map.get(key));
-                    } else if (key.equals("lineTwo")) {
-                        parentScenic.setLine2(map.get(key));
-                    } else {
-                        parentScenic.setLine3(map.get(key));
+                if (data != null) {
+                    HashMap<String, String> map = (HashMap<String, String>) data.getSerializableExtra("resultMap");
+                    if (map.isEmpty()) {
+                        tv3.setText(R.string.line_empty);
+                        return;
+                    }
+                    tv3.setText(getResources().getString(R.string.line_total) + map.size());
+                    for (String key : map.keySet()) {
+                        if (key.equals("lineOne")) {
+                            parentScenic.setLine1(map.get(key));
+                        } else if (key.equals("lineTwo")) {
+                            parentScenic.setLine2(map.get(key));
+                        } else {
+                            parentScenic.setLine3(map.get(key));
+                        }
                     }
                 }
                 break;

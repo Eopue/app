@@ -44,7 +44,6 @@ public class LineActivity extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.line_cancel);
 
         lineText.setText(getResources().getString(R.string.child_scenic_added) + stringValue);
-        lineText.setText("test");
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
