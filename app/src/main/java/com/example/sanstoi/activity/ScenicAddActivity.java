@@ -27,6 +27,7 @@ public class ScenicAddActivity extends AppCompatActivity {
     private Button btn_childAdd = null;
     private Button btn_submit = null;
     private Button btn_line_add = null;
+    private StringBuilder strs = null;
     ConnectToWebService connectToWebService = new ConnectToWebService();
 
     @Override
@@ -61,8 +62,8 @@ public class ScenicAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                if (!"".equals(tv2.getText().toString())) {
-                    intent.putExtra("lineText", tv2.getText().toString());
+                if (!"".equals(strs.toString())) {
+                    intent.putExtra("lineText", strs.substring(0, strs.length() - 1).toString());
                 } else {
                     intent.putExtra("lineText", "");
                 }
@@ -89,7 +90,7 @@ public class ScenicAddActivity extends AppCompatActivity {
                         //处理代码在此地
                         ChildScenic childScenic = (ChildScenic) bundle.get("result");
                         parentScenic.setChildsenics(childScenic);
-                        StringBuilder strs = new StringBuilder();
+                        strs = new StringBuilder();
                         for (ChildScenic child : parentScenic.getChildsenics()) {
                             strs.append(child.getChildScenicName());
                             strs.append(",");

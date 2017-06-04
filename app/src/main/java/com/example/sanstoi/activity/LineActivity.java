@@ -33,7 +33,7 @@ public class LineActivity extends AppCompatActivity {
 
     private void init() {
 
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         String stringValue = intent.getStringExtra("lineText");
 
         lineOne = (EditText) findViewById(R.id.lineOne);
