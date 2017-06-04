@@ -57,10 +57,11 @@
     <string name="error_price">请输入正确的价格</string>
     <string name="error_longtitude">请输入正确的纬度</string>
     <string name="error_latitude">请输入正确的经度</string>
-    <string name="line_one">线路一</string>
-    <string name="line_two">线路二</string>
-    <string name="line_three">线路三</string>
+    <string name="line_one">推荐线路一</string>
+    <string name="line_two">推荐线路二</string>
+    <string name="line_three">推荐线路三</string>
     <string name="line_add_btn">添加线路</string>
     <string name="line_total">总线路条数: </string>
     <string name="line_empty">您未设置任何线路</string>
+    <string name="line_clear">清除已有线路</string>
 </resources>

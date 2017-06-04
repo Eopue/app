@@ -1,12 +1,14 @@
 package com.example.sanstoi.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sanstoi.bean.ParentScenic;
 import com.example.sanstoi.myapplication.R;
@@ -24,7 +26,6 @@ public class ScenicAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<ParentScenic> mList;
     private ParentScenic parentScenic;
-    private PicassoUtil picassoUtil = new PicassoUtil();
 
     public ScenicAdapter(Context mContext, List<ParentScenic> mList){
         this.mContext = mContext;
@@ -73,8 +74,7 @@ public class ScenicAdapter extends BaseAdapter {
         viewHolder.tv_opentime.setText(parentScenic.getParentScenicOpenDate());
         viewHolder.tv_starttime.setText(parentScenic.getParentScenicStartTime());
         viewHolder.tv_endtime.setText(parentScenic.getParentScenicEndTime());
-        picassoUtil.loadImageView( mContext , parentScenic.getImage(), 400, 300, viewHolder.iv_img);
-
+        PicassoUtil.loadImageView( mContext , parentScenic.getImage(), 400, 300, viewHolder.iv_img);
         return convertView;
     }
 

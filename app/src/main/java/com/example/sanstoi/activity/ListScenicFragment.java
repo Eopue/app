@@ -94,6 +94,9 @@ public class ListScenicFragment extends Fragment {
                 parentScenic.setParentScenicProvince(jsonObject.getString("parentScenicProvince"));
                 parentScenic.setParentScenicName(jsonObject.getString("parentScenicName"));
                 parentScenic.setImage(jsonObject.getString("image"));
+                parentScenic.setLine1(jsonObject.getString("line1"));
+                parentScenic.setLine2(jsonObject.getString("line2"));
+                parentScenic.setLine3(jsonObject.getString("line3"));
                 list.add(parentScenic);
             }
             ScenicAdapter adapter = new ScenicAdapter(getActivity(),list);

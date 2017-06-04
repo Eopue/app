@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +69,7 @@ public class MapActivity extends AppCompatActivity {
     private ConnectToWebService connectToService;
     private Speak speak;
     private Base64Util base64Util;
-    private PicassoUtil picassoUtil = new PicassoUtil();
+    private ParentScenic parentScenic;
 
     //location
     private LocationClient mLocationClient;
@@ -84,7 +85,7 @@ public class MapActivity extends AppCompatActivity {
     //覆盖物图标
     private BitmapDescriptor mMarker;
     private RelativeLayout mMarkerLy;
-    private Switch sw ;
+    private Switch sw;
     private Polyline mPolyline;
 
     //子景点列表
@@ -119,7 +120,7 @@ public class MapActivity extends AppCompatActivity {
                 Bundle info = marker.getExtraInfo();
                 final ChildScenic childScenic = (ChildScenic) info.get("childScenic");
                 ImageView iv = (ImageView) mMarkerLy.findViewById(R.id.id_info_img);
-                picassoUtil.loadImageView(context, childScenic.getImage(), iv);
+                PicassoUtil.loadImageView(context, childScenic.getImage(), iv);
                 sw = (Switch) mMarkerLy.findViewById(R.id.sw_speak_detail);
                 Button btn_guide = (Button) findViewById(R.id.btn_guide);
                 final String str = childScenic.getChildScenicBrief();
@@ -127,29 +128,29 @@ public class MapActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         sw.setSelected(!sw.isSelected());
-                        if(sw.isSelected()){
+                        if (sw.isSelected()) {
                             speak.startSpeak(str);
-                        } else{
+                        } else {
                             speak.endSpeak();
                         }
                     }
                 });
 
-                btn_guide.setOnClickListener(new View.OnClickListener(){
+                btn_guide.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DrawLines(childScenic.getmLatitude(), childScenic.getmLongtitude());
+                        linesOfTwoPoints(childScenic.getmLatitude(), childScenic.getmLongtitude());
                     }
                 });
                 InfoWindow infoWindow;
                 TextView tv = new TextView(context);
                 tv.setBackgroundResource(R.drawable.button_down);
-                tv.setPadding(30,20,30,50);
+                tv.setPadding(30, 20, 30, 50);
                 tv.setText(childScenic.getChildScenicName());
                 tv.setTextColor(Color.parseColor("#000000"));
                 final LatLng latLng = marker.getPosition();
                 Point p = mBaiduMap.getProjection().toScreenLocation(latLng);
-                p.y -=47;
+                p.y -= 47;
                 LatLng ll = mBaiduMap.getProjection().fromScreenLocation(p);
 
                 infoWindow = new InfoWindow(tv, ll, 1);
@@ -173,12 +174,45 @@ public class MapActivity extends AppCompatActivity {
 
     }
 
-    public void  DrawLines(double lon, double lat ){
-        if(mPolyline != null ){
+    public void linePlan(String flag) {
+        if (mPolyline != null) {
             mPolyline.remove();
         }
-        double startlats=mLatitude;
-        double startlongs=mLongtitude;
+        String line = "";
+        if ("line1".equals(flag)) {
+            line = parentScenic.getLine1();
+        } else if ("line2".equals(flag)) {
+            line = parentScenic.getLine2();
+        } else {
+            line = parentScenic.getLine3();
+        }
+
+        if (line.contains(",")) {
+            List<LatLng> points = new ArrayList<LatLng>();
+            String[] strs = line.split(",");
+            for (int index = 0; index < strs.length; index++) {
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getChildScenicName().equals(strs[index])) {
+                        double startlats = list.get(i).getmLatitude();
+                        double startlongs = list.get(i).getmLongtitude();
+                        LatLng p = new LatLng(startlongs, startlats);
+                        points.add(p);
+                        break;
+                    }
+                }
+            }
+            OverlayOptions ooPolyline = new PolylineOptions().width(10)
+                    .points(points);
+            mPolyline = (Polyline) mBaiduMap.addOverlay(ooPolyline);
+        }
+    }
+
+    public void linesOfTwoPoints(double lon, double lat) {
+        if (mPolyline != null) {
+            mPolyline.remove();
+        }
+        double startlats = mLatitude;
+        double startlongs = mLongtitude;
         LatLng p1 = new LatLng(startlats, startlongs);
         LatLng p2 = new LatLng(lat, lon);
         List<LatLng> points = new ArrayList<LatLng>();
@@ -191,61 +225,61 @@ public class MapActivity extends AppCompatActivity {
     /*
      * 调用Distance方法获取两点间x,y轴之间的距离
      */
-        double cc= Distance(startlats, startlongs, lat, lon);
+        double cc = Distance(startlats, startlongs, lat, lon);
 
-        int length=(int)cc;
+        int length = (int) cc;
 
-        Toast.makeText(this, "您与终端距离"+length+"米", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "您与终端距离" + length + "米", Toast.LENGTH_SHORT).show();
 
 
     }
 
-    public Double Distance(double lat1, double lng1,double lat2, double lng2) {
+    public Double Distance(double lat1, double lng1, double lat2, double lng2) {
 
 
-        Double R=6370996.81;  //地球的半径
+        Double R = 6370996.81;  //地球的半径
 
     /*
      * 获取两点间x,y轴之间的距离
      */
-        Double x = (lng2 - lng1)*Math.PI*R*Math.cos(((lat1+lat2)/2)*Math.PI/180)/180;
-        Double y = (lat2 - lat1)*Math.PI*R/180;
+        Double x = (lng2 - lng1) * Math.PI * R * Math.cos(((lat1 + lat2) / 2) * Math.PI / 180) / 180;
+        Double y = (lat2 - lat1) * Math.PI * R / 180;
 
 
         Double distance = Math.hypot(x, y);   //得到两点之间的直线距离
 
-        return  distance;
+        return distance;
 
     }
 
     private void initMarker() {
         mMarker = BitmapDescriptorFactory.fromResource(R.drawable.icon_openmap_mark);
-        mMarkerLy = (RelativeLayout)findViewById(R.id.id_marker_layout);
+        mMarkerLy = (RelativeLayout) findViewById(R.id.id_marker_layout);
     }
 
-    public void getData(){
+    public void getData() {
         try {
             Bundle bundle = (Bundle) getIntent().getExtras().get("bundle");
-            ParentScenic parentScenic = (ParentScenic) bundle.getParcelable("parentScenic");
+            parentScenic = (ParentScenic) bundle.getParcelable("parentScenic");
             connectToService = new ConnectToWebService();
             JSONArray obj = connectToService.queryChildScenicByParentScenicId(parentScenic.getParentScenicID());
-            for(int i = 0; i < obj.length(); i++){
-                    JSONObject jsonObject = (JSONObject) obj.get(i);
-                    ChildScenic childScenic = new ChildScenic();
-                    childScenic.setChildScenicID(jsonObject.getInt("childScenicID"));
-                    childScenic.setParentScenicID(jsonObject.getInt("parentScenicID"));
-                    childScenic.setChildScenicName(jsonObject.getString("childScenicName"));
-                    childScenic.setChildScenicOpenDate(jsonObject.getString("childScenicOpenDate"));
-                    childScenic.setChildScenicStartTime(jsonObject.getString("childScenicStartTime"));
-                    childScenic.setChildScenicEndTime(jsonObject.getString("childScenicEndTime"));
-                    childScenic.setChildScenicPrice(jsonObject.getDouble("childScenicPrice"));
-                    childScenic.setChildScenicBrief(jsonObject.getString("childScenicBrief"));
-                    childScenic.setmLatitude(jsonObject.getDouble("mLatitude"));
-                    childScenic.setmLongtitude(jsonObject.getDouble("mLongtitude"));
-                    childScenic.setImage(jsonObject.getString("image"));
-                    list.add(childScenic);
-                }
-        }catch (Exception e) {
+            for (int i = 0; i < obj.length(); i++) {
+                JSONObject jsonObject = (JSONObject) obj.get(i);
+                ChildScenic childScenic = new ChildScenic();
+                childScenic.setChildScenicID(jsonObject.getInt("childScenicID"));
+                childScenic.setParentScenicID(jsonObject.getInt("parentScenicID"));
+                childScenic.setChildScenicName(jsonObject.getString("childScenicName"));
+                childScenic.setChildScenicOpenDate(jsonObject.getString("childScenicOpenDate"));
+                childScenic.setChildScenicStartTime(jsonObject.getString("childScenicStartTime"));
+                childScenic.setChildScenicEndTime(jsonObject.getString("childScenicEndTime"));
+                childScenic.setChildScenicPrice(jsonObject.getDouble("childScenicPrice"));
+                childScenic.setChildScenicBrief(jsonObject.getString("childScenicBrief"));
+                childScenic.setmLatitude(jsonObject.getDouble("mLatitude"));
+                childScenic.setmLongtitude(jsonObject.getDouble("mLongtitude"));
+                childScenic.setImage(jsonObject.getString("image"));
+                list.add(childScenic);
+            }
+        } catch (Exception e) {
             Toast.makeText(getApplicationContext(), R.string.analyze_information_error, Toast.LENGTH_SHORT).show();
         }
     }
@@ -277,7 +311,7 @@ public class MapActivity extends AppCompatActivity {
         super.onStart();
         //开始定位
         mBaiduMap.setMyLocationEnabled(true);
-        if(!mLocationClient.isStarted()) {
+        if (!mLocationClient.isStarted()) {
             mLocationClient.start();
             //开启传感器
             myOrientationListener.start();
@@ -317,7 +351,7 @@ public class MapActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -354,6 +388,21 @@ public class MapActivity extends AppCompatActivity {
             case R.id.id_add_overlay:
                 addOverLays();
                 break;
+            case R.id.line_one:
+                //推荐路线
+                linePlan("line1");
+                break;
+            case R.id.line_two:
+                linePlan("line2");
+                break;
+            case R.id.line_three:
+                linePlan("line3");
+                break;
+            case R.id.line_clear:
+                if (mPolyline != null) {
+                    mPolyline.remove();
+                }
+                break;
             default:
                 break;
         }
@@ -365,7 +414,7 @@ public class MapActivity extends AppCompatActivity {
         LatLng latLng = null;
         Marker marker = null;
         OverlayOptions options;
-        for(ChildScenic childScenic : list){
+        for (ChildScenic childScenic : list) {
             //经纬度
             latLng = new LatLng(childScenic.getmLongtitude(), childScenic.getmLatitude());
             options = new MarkerOptions().position(latLng).icon(mMarker).zIndex(5);
@@ -399,14 +448,14 @@ public class MapActivity extends AppCompatActivity {
             mLatitude = bdLocation.getLatitude();
             mLongtitude = bdLocation.getLongitude();
             //设置自定义图标
-            MyLocationConfiguration config = new MyLocationConfiguration(mLocationModel,true,mIconLocation);
+            MyLocationConfiguration config = new MyLocationConfiguration(mLocationModel, true, mIconLocation);
             mBaiduMap.setMyLocationConfigeration(config);
             if (isFirstIn) {
                 LatLng latLng = new LatLng(bdLocation.getLatitude(),
                         bdLocation.getLongitude());
                 MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
                 mBaiduMap.animateMapStatus(msu);
-                Toast.makeText(context,bdLocation.getAddrStr(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, bdLocation.getAddrStr(), Toast.LENGTH_SHORT).show();
                 isFirstIn = false;
             }
         }

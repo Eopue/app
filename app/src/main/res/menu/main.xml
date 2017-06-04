@@ -41,4 +41,20 @@
         android:id="@+id/id_add_overlay"
         app:showAsAction="never"
         android:title="添加覆盖物" />
+
+    <item
+        android:id="@+id/line_one"
+        android:title="@string/line_one" />
+
+    <item
+        android:id="@+id/line_two"
+        android:title="@string/line_two" />
+
+    <item
+        android:id="@+id/line_three"
+        android:title="@string/line_three" />
+
+    <item
+        android:id="@+id/line_clear"
+        android:title="@string/line_clear" />
 </menu>

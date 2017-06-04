@@ -64,4 +64,5 @@
     <string name="line_add_btn">Line Add</string>
     <string name="line_total">The Line Total: </string>
     <string name="line_empty">You hadn\'t set any line</string>
+    <string name="line_clear">Clear line</string>
 </resources>

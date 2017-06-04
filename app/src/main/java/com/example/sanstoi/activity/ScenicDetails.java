@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sanstoi.bean.ParentScenic;
 import com.example.sanstoi.myapplication.MapActivity;
